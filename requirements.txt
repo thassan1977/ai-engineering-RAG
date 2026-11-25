@@ -1,0 +1,14 @@
+# Retrieval evaluation and semantic-search dependencies.
+# Supported Python: 3.11 - 3.15
+
+# Semantic embeddings and SentenceTransformer models
+sentence-transformers==6.3.0
+
+# Explicitly pinned because sentence-transformers uses PyTorch underneath.
+torch==2.15.0
+
+# Used by embedding conversion and numerical utilities.
+numpy==2.5.5
+
+# Test suite
+pytest==9.2.0
