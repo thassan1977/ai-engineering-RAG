@@ -6,6 +6,8 @@ I am not only calling an embedding API and sending the result to an LLM. I am bu
 
 The goal is to understand how a RAG system finds the right evidence before an LLM uses it.
 
+> **Roadmap:** see [ROADMAP.md](ROADMAP.md) for the step-by-step checklist taking this lab to a production-level RAG system on real documents (BEIR SciFact and the Kubernetes documentation).
+
 ## What this project demonstrates
 
 - Building a reusable ranking interface.
