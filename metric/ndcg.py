@@ -31,6 +31,6 @@ class NDCG(Metric):
             (2 ** rel_value - 1) / math.log2(i + 1)
             for i, rel_value in enumerate(ranked_dcg, start=1)
         )
-        return dcg / ideal_dcg if ideal_dcg > 0 else 0
+        return min(1.0, max(0, dcg / ideal_dcg)) if ideal_dcg > 0 else 0
             
 

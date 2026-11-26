@@ -2,6 +2,7 @@
 
 from collections.abc import Mapping, Sequence
 from typing import Any
+import warnings
 
 from metric.metric import Metric    
 from metric.types import RelevanceJudgments
@@ -97,17 +98,21 @@ class Evaluator:
             }
         
         reasons = []
+        warnings = []
 
         #fail if the mean delta < -max_mean_drop
         if comparison["mean_delta"] is not None and comparison["mean_delta"] < -max_mean_drop - DELTA_REPORT_TOLERANCE:
             reasons.append("mean delta below threshold")
         
-        # fail if query delta < -max_query_drop
+        # fail if query delta < -max_query_drop or warn if near the threshold
         for query_id, delta in comparison["per_query_delta"].items():
+            if delta < 0 and abs(delta) >= max_query_drop - DELTA_REPORT_TOLERANCE:
+                warnings.append(f"query {query_id} is at or near the allowed drop threshold")
             if delta < -max_query_drop - DELTA_REPORT_TOLERANCE:
                     reasons.append(f"query {query_id} dropped by {abs(delta)}, max allowed drop is {max_query_drop}")
         return {
             "status": "FAIL" if reasons else "PASS",
             "reasons": reasons,
+            "warnings": warnings,
         }
 
