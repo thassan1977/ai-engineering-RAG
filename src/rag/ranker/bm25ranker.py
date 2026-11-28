@@ -67,8 +67,8 @@ class Bm25Ranker(Ranker):
             score += idf * (tf * (self.k1 + 1)) / (tf + self.k1 * normalization)
         return score
 
-    def rank(self, query: Query, top_k: int | None = None) -> list[str]:
-        if top_k is None or top_k <= 0:
+    def rank(self, query: Query, top_k: int) -> list[str]:
+        if top_k <= 0:
             raise ValueError("top_k must be positive")
         if not self.documents:
             return []

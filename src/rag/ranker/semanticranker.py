@@ -64,11 +64,11 @@ class SemanticRanker(Ranker):
             return 0.0
         return dot_product / (norm1 * norm2)
 
-    def rank(self, query: Query, top_k: int | None = None) -> list[str]:
+    def rank(self, query: Query, top_k: int) -> list[str]:
         if query is None or not query.text or not query.text.strip():
             raise ValueError("query must not be empty")
 
-        if top_k is None or top_k <= 0:
+        if top_k <= 0:
             raise ValueError("top_k must be positive")
         # embed query
         query_embedding = self.embedding_provider.embed_query(query.text)

@@ -23,8 +23,8 @@ class HybridRanker(Ranker):
         self.bm25_weight = bm25_weight
         self.semantic_weight = semantic_weight
 
-    def rank(self, query: Query, top_k: int | None = None) -> list[str]:
-        if top_k is None or top_k <= 0:
+    def rank(self, query: Query, top_k: int) -> list[str]:
+        if top_k <= 0:
             raise ValueError("top_k must be positive")
 
         candidate_k = max(top_k * 10, 20)
