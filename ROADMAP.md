@@ -57,7 +57,7 @@ Goal: make the existing code trustworthy.
 - [ ] Add `ruff` (lint and format), `mypy` and `pre-commit`
 - [ ] Fix `.gitignore` (add `.DS_Store`) and remove the committed `.DS_Store`
 - **Done when:**
-  - [ ] `uv sync && ruff check && mypy src` all pass
+  - [ ] `uv sync && uv run ruff check && uv run mypy src` all pass in a fresh shell (no venv activation)
 
 ### 0.2 Tests for everything that exists
 

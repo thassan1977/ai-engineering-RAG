@@ -18,7 +18,8 @@ dependencies = [
     "numpy==2.2.6",
 ]
 
-[project.optional-dependencies]
+# Development tools. uv installs the "dev" group by default on `uv sync`.
+[dependency-groups]
 dev = [
     "pytest==9.2.0",
     "ruff>=0.9.0",

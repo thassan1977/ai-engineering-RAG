@@ -161,25 +161,36 @@ These results are from a controlled learning dataset, not a claim of production 
 
 ## Run locally
 
-This project uses Python 3.10.
+This project uses [uv](https://docs.astral.sh/uv/) for environments and dependencies. The Python version is pinned in `.python-version`, and uv installs it automatically if needed.
+
+Install the runtime and development dependencies (including ruff, mypy, pytest and pre-commit):
 
 ```bash
-python3.10 -m venv .venv310
-source .venv310/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+uv sync
+```
+
+Install the git hooks (once per clone):
+
+```bash
+uv run pre-commit install
 ```
 
 Run the application or evaluation entry point:
 
 ```bash
-python main.py
+uv run python -m rag.main
+```
+
+Run the quality checks:
+
+```bash
+uv run ruff check && uv run ruff format --check && uv run mypy src
 ```
 
 Run tests:
 
 ```bash
-pytest
+uv run pytest
 ```
 
 The first semantic-search run downloads the configured Sentence Transformers model from Hugging Face.
